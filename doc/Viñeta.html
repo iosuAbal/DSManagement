@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Iosu Abal" />
+
+<meta name="date" content="2024-10-13" />
+
+<title>Viñeta</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Viñeta</h1>
+<h4 class="author">Iosu Abal</h4>
+<h4 class="date">2024-10-13</h4>
+
+
+
+<p>En este pequeño tutorial se detallará cómo utilizar este nuevo
+paquete creado para el preprocesado de bases de datos. Para simular las
+tablas de una base de datos, se han creado los objetos Dataset y
+AtributeDataset.</p>
+<p>Posteriormente se crearán pruebas de cada una de las funciones
+disponibles. Cabe destacar, que existen algunas funciones (tituladas con
+el sufijo ’_base’) que no están disponibles de cara al público, ya que
+son funciones internas del paquete y no se describirán en este
+tutorial.</p>
+<p>Esas funciones estan definidas en la clase utils.R, que es la primera
+en ejecutarse al cargar el paquete. Posteriormente esas funciones base
+son llamadas desde los métodos definidos en ‘Dataset.R’, que sí son
+métodos públicos. Finalmente, en el tercer fichero llamado
+‘plotting_functions.R’ estan definidas las dos funciones relacionadas
+con los gráficos, por lo que se han definido en un fichero a parte.</p>
+<div id="objetos-s4" class="section level1">
+<h1>Objetos S4</h1>
+<p>Para que este paquete sea más flexible, se ha decidido crear objetos
+S4 para simular un dataset. Concretamente tenemos la clase
+“AtributoDataset”, que representarán las variables o columnas de un
+dataset, y la clase “Dataset”, que contendrá una lista de esos
+atributos.</p>
+<div id="clase-atributodataset" class="section level2">
+<h2>Clase AtributoDataset</h2>
+<p>Esta clase contiene los siguientes slots:</p>
+<ul>
+<li>Nombre: Nombre del atributo</li>
+<li>Tipo: Clase a la que pertencen los valores (numerico, logico…)</li>
+<li>Valores: Valores que forman el atributo</li>
+<li>Cortes: Almacena los puntos de corte en caso de que los valores
+esten discretizados por intervalos. Puede ser nulo</li>
+</ul>
+<p>Para la creación de atributos se utilizará la siguiente sintaxis,
+donde proporcionaremos un nombre y una lista con los valores
+correspondientes:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>numeric_attr <span class="ot">&lt;-</span> <span class="fu">atributoDataset</span>(<span class="st">&quot;Numeric Attribute&quot;</span>, <span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>))</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>logical_attr <span class="ot">&lt;-</span> <span class="fu">atributoDataset</span>(<span class="st">&quot;Logical Attribute&quot;</span>, <span class="fu">sample</span>(<span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>), <span class="at">size =</span> <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>logical_attr</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co">#&gt; An object of class &quot;AtributoDataset&quot;</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co">#&gt; Slot &quot;nombre&quot;:</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Logical Attribute&quot;</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="co">#&gt; Slot &quot;tipo&quot;:</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="co">#&gt; [1] &quot;logical&quot;</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="co">#&gt; Slot &quot;valores&quot;:</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="co">#&gt;  [1] FALSE  TRUE FALSE  TRUE  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE  TRUE</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="co">#&gt; [13] FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE FALSE</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="co">#&gt; Slot &quot;cortes&quot;:</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="co">#&gt; NULL</span></span></code></pre></div>
+<p>Al crearlos, internamente se valida que ninguno de los slots sea
+vacío o nulo (menos el slot ‘cortes’).</p>
+</div>
+<div id="clase-dataset" class="section level2">
+<h2>Clase Dataset</h2>
+<p>Esta clase es algo más sencilla y está formada por:</p>
+<ul>
+<li>Nombre: Nombre del dataset</li>
+<li>Atributos: Lista de AtributosDataset</li>
+</ul>
+<p>Para esta clase se han implementado dos constructores diferentes. La
+función dataset() crea un dataset a partir de una lista de
+atributos.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>my_dataset <span class="ot">&lt;-</span> <span class="fu">createDataset</span>(<span class="st">&quot;My Dataset&quot;</span>, <span class="fu">list</span>(numeric_attr, logical_attr))</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>my_dataset</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co">#&gt; An object of class &quot;Dataset&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; Slot &quot;nombre&quot;:</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt; [1] &quot;My Dataset&quot;</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; Slot &quot;atributos&quot;:</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; [[1]]</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; An object of class &quot;AtributoDataset&quot;</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; Slot &quot;nombre&quot;:</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Numeric Attribute&quot;</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co">#&gt; Slot &quot;tipo&quot;:</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="co">#&gt; [1] &quot;integer&quot;</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co">#&gt; Slot &quot;valores&quot;:</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="co">#&gt;  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20</span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="co">#&gt; Slot &quot;cortes&quot;:</span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="co">#&gt; NULL</span></span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="co">#&gt; [[2]]</span></span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="co">#&gt; An object of class &quot;AtributoDataset&quot;</span></span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a><span class="co">#&gt; Slot &quot;nombre&quot;:</span></span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Logical Attribute&quot;</span></span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a><span class="co">#&gt; Slot &quot;tipo&quot;:</span></span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a><span class="co">#&gt; [1] &quot;logical&quot;</span></span>
+<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a><span class="co">#&gt; Slot &quot;valores&quot;:</span></span>
+<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a><span class="co">#&gt;  [1] FALSE  TRUE FALSE  TRUE  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE  TRUE</span></span>
+<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a><span class="co">#&gt; [13] FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE FALSE</span></span>
+<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a><span class="co">#&gt; Slot &quot;cortes&quot;:</span></span>
+<span id="cb2-36"><a href="#cb2-36" tabindex="-1"></a><span class="co">#&gt; NULL</span></span></code></pre></div>
+<p>Sin embargo, el constructor datasetFromCSV() crea el dataset desde un
+fichero csv, donde será obligatorio especificar la ruta de dicho
+fichero.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>dsetCSV <span class="ot">&lt;-</span> <span class="fu">datasetFromCSV</span>(<span class="st">&quot;../data/fichero.csv&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>dsetCSV</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; An object of class &quot;Dataset&quot;</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; Slot &quot;nombre&quot;:</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; [1] &quot;fichero.csv&quot;</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; Slot &quot;atributos&quot;:</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt; [[1]]</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; An object of class &quot;AtributoDataset&quot;</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt; Slot &quot;nombre&quot;:</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Altura&quot;</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="co">#&gt; Slot &quot;tipo&quot;:</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="co">#&gt; [1] &quot;integer&quot;</span></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="co">#&gt; Slot &quot;valores&quot;:</span></span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="co">#&gt; [1] 120 125 160 180</span></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a><span class="co">#&gt; Slot &quot;cortes&quot;:</span></span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a><span class="co">#&gt; NULL</span></span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a><span class="co">#&gt; [[2]]</span></span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="co">#&gt; An object of class &quot;AtributoDataset&quot;</span></span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a><span class="co">#&gt; Slot &quot;nombre&quot;:</span></span>
+<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Peso&quot;</span></span>
+<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a><span class="co">#&gt; Slot &quot;tipo&quot;:</span></span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a><span class="co">#&gt; [1] &quot;integer&quot;</span></span>
+<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a><span class="co">#&gt; Slot &quot;valores&quot;:</span></span>
+<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a><span class="co">#&gt; [1] 40 44 50 70</span></span>
+<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a><span class="co">#&gt; Slot &quot;cortes&quot;:</span></span>
+<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a><span class="co">#&gt; NULL</span></span></code></pre></div>
+<p>En ambos casos y cada vez que se crea un objeto del tipo Dataset, se
+valida que tenga atributos de la clase AtributoDataset, y que no
+contenga nombres de atributos repetidos.</p>
+</div>
+</div>
+<div id="fichero-dataset.r" class="section level1">
+<h1>Fichero Dataset.R</h1>
+<p>En este fichero de R se han implementado ambas clases y todos sus
+métodos.</p>
+<div id="discretizar-por-igual-anchura-e-igual-frecuencia" class="section level2">
+<h2>Discretizar por igual anchura e igual frecuencia</h2>
+<p>Para este primer método veremos como podemos discretizar los valores
+de un dataset (o de un atributo) en igual frecuencia y en igual anchura.
+Para ello hemos tenido que crear la función discretizeEW() y
+discretizeEF() genéricamente, y después, crear las implementaciones para
+cada clase.</p>
+<p>Supongamos que queremos discretizar en 3 intervalos de igual anchura
+los valores de un atributo: (utilizaremos los atributos ya creados)</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">discretizeEW</span>(numeric_attr, <span class="dv">3</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">#&gt; An object of class &quot;AtributoDataset&quot;</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; Slot &quot;nombre&quot;:</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Numeric Attribute - Discretized(EW)&quot;</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; Slot &quot;tipo&quot;:</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; [1] &quot;factor&quot;</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; Slot &quot;valores&quot;:</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt;  [1] (-Inf, 7.333]   (-Inf, 7.333]   (-Inf, 7.333]   (-Inf, 7.333]  </span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt;  [5] (-Inf, 7.333]   (-Inf, 7.333]   (-Inf, 7.333]   (7.333, 13.667)</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt;  [9] (7.333, 13.667) (7.333, 13.667) (7.333, 13.667) (7.333, 13.667)</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt; [13] (7.333, 13.667) [13.667, Inf)   [13.667, Inf)   [13.667, Inf)  </span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt; [17] [13.667, Inf)   [13.667, Inf)   [13.667, Inf)   [13.667, Inf)  </span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt; Levels: (-Inf, 7.333] (7.333, 13.667) [13.667, Inf)</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">#&gt; Slot &quot;cortes&quot;:</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt; [1]  7.333 13.667</span></span></code></pre></div>
+<p>Veamos ahora como podemos discretizar en 2 intervalos de igual
+frecuencia todos los atributos de un dataset. Para ello, utilizaremos el
+dataset creado desde el csv, que contiene la altura y el peso de 4
+individuos.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">discretizeEF</span>(dsetCSV, <span class="dv">2</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt; An object of class &quot;Dataset&quot;</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt; Slot &quot;nombre&quot;:</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; [1] &quot;fichero.csv&quot;</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; Slot &quot;atributos&quot;:</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; [[1]]</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt; An object of class &quot;AtributoDataset&quot;</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt; Slot &quot;nombre&quot;:</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Altura - Discretized(EF)&quot;</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co">#&gt; Slot &quot;tipo&quot;:</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="co">#&gt; [1] &quot;factor&quot;</span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co">#&gt; Slot &quot;valores&quot;:</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="co">#&gt; [1] (-Inf, 125] (-Inf, 125] [125, Inf)  [125, Inf) </span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co">#&gt; Levels: (-Inf, 125] [125, Inf)</span></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a><span class="co">#&gt; Slot &quot;cortes&quot;:</span></span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a><span class="co">#&gt; [1] 125</span></span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a><span class="co">#&gt; [[2]]</span></span>
+<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a><span class="co">#&gt; An object of class &quot;AtributoDataset&quot;</span></span>
+<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a><span class="co">#&gt; Slot &quot;nombre&quot;:</span></span>
+<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Peso - Discretized(EF)&quot;</span></span>
+<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a><span class="co">#&gt; Slot &quot;tipo&quot;:</span></span>
+<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a><span class="co">#&gt; [1] &quot;factor&quot;</span></span>
+<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a><span class="co">#&gt; Slot &quot;valores&quot;:</span></span>
+<span id="cb5-32"><a href="#cb5-32" tabindex="-1"></a><span class="co">#&gt; [1] (-Inf, 44] (-Inf, 44] [44, Inf)  [44, Inf) </span></span>
+<span id="cb5-33"><a href="#cb5-33" tabindex="-1"></a><span class="co">#&gt; Levels: (-Inf, 44] [44, Inf)</span></span>
+<span id="cb5-34"><a href="#cb5-34" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-35"><a href="#cb5-35" tabindex="-1"></a><span class="co">#&gt; Slot &quot;cortes&quot;:</span></span>
+<span id="cb5-36"><a href="#cb5-36" tabindex="-1"></a><span class="co">#&gt; [1] 44</span></span></code></pre></div>
+<p>Podemos observar como ha creado un punto de corte diferent para cada
+atributo, de tal manera que hay la misma cantidad de elementos en cada
+intervalo de cada atributo.</p>
+</div>
+<div id="cálculo-de-métricas" class="section level2">
+<h2>Cálculo de métricas</h2>
+<p>Esta función calcula la varianza y el Area Bajo la Curva (AUC) para
+cada variable cuantitativa, y calcula la entropía para cada variable
+cualitativa del dataset. Para que el AUC funcione correctamente, es
+necesario que el dataset cuente con un atributo lógico con el que
+comparar el clasificador. En caso de no contar con ninguno, calculará
+sólamente la varianza y la entropia, mostrando un warning.</p>
+<p>Para este ejemplo vamos a crear un dataset partiendo de una lista de
+atributos. Tras llamar a la función calculateMetrics() nos devolverá una
+lista con varianza, AUC y entropía para cada atributo del dataset. Por
+supuesto, en las variables cuantitativas la entropia no tendrá valor, y
+viceversa.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">calculateMetrics</span>(my_dataset)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt; $`Numeric Attribute`</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt;   Variance        AUC    Entropy </span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt; 35.0000000  0.2760417         NA </span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co">#&gt; $`Logical Attribute`</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; Variance      AUC  Entropy </span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt;       NA       NA    0.971</span></span></code></pre></div>
+<p>Se puede observar, como la entropía no tiene valor (NA) en el caso de
+atributos numéricos, y lo mismo para la varianza y el AUC en el caso del
+atributo lógico.</p>
+</div>
+<div id="normalización-y-estandarización-de-atributos-y-datasets" class="section level2">
+<h2>Normalización y estandarización de atributos y datasets</h2>
+<p>Con esta función se busca estandarizar y normalizar los valores de un
+atributo o de un dataset entero. Para ese caso, se recorren todos los
+atributos del dataset que sean cuantitiativos e internamente se llama a
+la función standarize_base o normalize_base del fichero utils.R</p>
+<p>Por ello se han creado dos implementaciones tambien para esta
+función, una para el objeto AtributoDataset y otra para la clase
+Dataset. Veamos primero como utilizarlo para normalizar un atributo.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>atributo <span class="ot">&lt;-</span> <span class="fu">atributoDataset</span>(<span class="at">name =</span> <span class="st">&quot;Attribute1&quot;</span>, <span class="at">vector =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>))</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">normalize</span>(atributo)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co">#&gt; An object of class &quot;AtributoDataset&quot;</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#&gt; Slot &quot;nombre&quot;:</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Attribute1 - Normalized&quot;</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt; Slot &quot;tipo&quot;:</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co">#&gt; [1] &quot;numeric&quot;</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co">#&gt; Slot &quot;valores&quot;:</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co">#&gt; [1] 0.00 0.25 0.50 0.75 1.00</span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co">#&gt; Slot &quot;cortes&quot;:</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="co">#&gt; NULL</span></span></code></pre></div>
+<p>Vemos que los valores del atributo estan ahora normalizados entre 0 y
+1.</p>
+<p>En el caso del dataset veamos como estandarizar todos los atributos
+numericos</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">createDataset</span>(<span class="at">nombre =</span> <span class="st">&quot;Example&quot;</span>, <span class="at">atributos =</span> <span class="fu">list</span>( </span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  <span class="fu">atributoDataset</span>(<span class="at">name =</span> <span class="st">&quot;Numeric1&quot;</span>, <span class="at">vector =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">3</span>,<span class="dv">2</span>, <span class="dv">5</span>)),</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  <span class="fu">atributoDataset</span>(<span class="at">name =</span> <span class="st">&quot;Numeric2&quot;</span>, <span class="at">vector =</span> <span class="fu">c</span>(<span class="dv">21</span>, <span class="dv">31</span>, <span class="dv">60</span>, <span class="dv">76</span>)),</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>  <span class="fu">atributoDataset</span>(<span class="at">name =</span> <span class="st">&quot;FactorAttr&quot;</span>, <span class="at">vector =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>)))))</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="fu">standarize</span>(dataset)</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#&gt; An object of class &quot;Dataset&quot;</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt; Slot &quot;nombre&quot;:</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Example&quot;</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co">#&gt; Slot &quot;atributos&quot;:</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co">#&gt; [[1]]</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="co">#&gt; An object of class &quot;AtributoDataset&quot;</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co">#&gt; Slot &quot;nombre&quot;:</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Numeric1 - Standarized&quot;</span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="co">#&gt; Slot &quot;tipo&quot;:</span></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="co">#&gt; [1] &quot;numeric&quot;</span></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="co">#&gt; Slot &quot;valores&quot;:</span></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="co">#&gt; [1] -0.9486833 -0.6324555  0.3162278 -0.3162278  1.5811388</span></span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="co">#&gt; Slot &quot;cortes&quot;:</span></span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a><span class="co">#&gt; NULL</span></span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a><span class="co">#&gt; [[2]]</span></span>
+<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a><span class="co">#&gt; An object of class &quot;AtributoDataset&quot;</span></span>
+<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a><span class="co">#&gt; Slot &quot;nombre&quot;:</span></span>
+<span id="cb8-29"><a href="#cb8-29" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Numeric2 - Standarized&quot;</span></span>
+<span id="cb8-30"><a href="#cb8-30" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-31"><a href="#cb8-31" tabindex="-1"></a><span class="co">#&gt; Slot &quot;tipo&quot;:</span></span>
+<span id="cb8-32"><a href="#cb8-32" tabindex="-1"></a><span class="co">#&gt; [1] &quot;numeric&quot;</span></span>
+<span id="cb8-33"><a href="#cb8-33" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-34"><a href="#cb8-34" tabindex="-1"></a><span class="co">#&gt; Slot &quot;valores&quot;:</span></span>
+<span id="cb8-35"><a href="#cb8-35" tabindex="-1"></a><span class="co">#&gt; [1] -1.0219023 -0.6288629  0.5109511  1.1398141</span></span>
+<span id="cb8-36"><a href="#cb8-36" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-37"><a href="#cb8-37" tabindex="-1"></a><span class="co">#&gt; Slot &quot;cortes&quot;:</span></span>
+<span id="cb8-38"><a href="#cb8-38" tabindex="-1"></a><span class="co">#&gt; NULL</span></span>
+<span id="cb8-39"><a href="#cb8-39" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-40"><a href="#cb8-40" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-41"><a href="#cb8-41" tabindex="-1"></a><span class="co">#&gt; [[3]]</span></span>
+<span id="cb8-42"><a href="#cb8-42" tabindex="-1"></a><span class="co">#&gt; An object of class &quot;AtributoDataset&quot;</span></span>
+<span id="cb8-43"><a href="#cb8-43" tabindex="-1"></a><span class="co">#&gt; Slot &quot;nombre&quot;:</span></span>
+<span id="cb8-44"><a href="#cb8-44" tabindex="-1"></a><span class="co">#&gt; [1] &quot;FactorAttr&quot;</span></span>
+<span id="cb8-45"><a href="#cb8-45" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-46"><a href="#cb8-46" tabindex="-1"></a><span class="co">#&gt; Slot &quot;tipo&quot;:</span></span>
+<span id="cb8-47"><a href="#cb8-47" tabindex="-1"></a><span class="co">#&gt; [1] &quot;factor&quot;</span></span>
+<span id="cb8-48"><a href="#cb8-48" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-49"><a href="#cb8-49" tabindex="-1"></a><span class="co">#&gt; Slot &quot;valores&quot;:</span></span>
+<span id="cb8-50"><a href="#cb8-50" tabindex="-1"></a><span class="co">#&gt; [1] A B A A</span></span>
+<span id="cb8-51"><a href="#cb8-51" tabindex="-1"></a><span class="co">#&gt; Levels: A B</span></span>
+<span id="cb8-52"><a href="#cb8-52" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb8-53"><a href="#cb8-53" tabindex="-1"></a><span class="co">#&gt; Slot &quot;cortes&quot;:</span></span>
+<span id="cb8-54"><a href="#cb8-54" tabindex="-1"></a><span class="co">#&gt; NULL</span></span></code></pre></div>
+<p>Vemos que ambos atributos numericos tienen ahora media 0, y el
+atributo de tipo factor no se ha modificado.</p>
+</div>
+<div id="filtrado-por-metricas" class="section level2">
+<h2>Filtrado por metricas</h2>
+<p>Esta función nos permite quedarnos con los atributos de un dataset
+que cumplan ciertas métricas. Las métricas posibles son las mencionadas
+antes (Varianza, AUC y Entropía). Por lo tanto deberemos indicar, el
+tipo de métrica, el operador, y el valor de la métrica que nos interese.
+Debido a que internamente necesita calcular el AUC, también será
+necesario que el dataset cuente con un atributo lógico</p>
+<p>En este caso, vamos a crear un dataset con un atributo numérico y dos
+atributos de tipo factor. Supongamos que queremos filtrar el dataset, y
+quedarnos con los atributos que su entropía sea 1 como máximo.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">createDataset</span>(<span class="at">nombre =</span> <span class="st">&quot;Example&quot;</span>, <span class="at">atributos =</span> <span class="fu">list</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>  <span class="fu">atributoDataset</span>(<span class="at">name =</span> <span class="st">&quot;NumericAttr&quot;</span>, <span class="at">vector =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)),</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="fu">atributoDataset</span>(<span class="at">name =</span> <span class="st">&quot;FactorAttr&quot;</span>, <span class="at">vector =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;rojo&quot;</span>,<span class="st">&quot;verde&quot;</span>,<span class="st">&quot;verde&quot;</span>, <span class="st">&quot;verde&quot;</span>))),</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  <span class="fu">atributoDataset</span>(<span class="at">name =</span> <span class="st">&quot;FactorAttr2&quot;</span>, <span class="at">vector =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;rojo&quot;</span>,<span class="st">&quot;verde&quot;</span>,<span class="st">&quot;azul&quot;</span>,<span class="st">&quot;amarillo&quot;</span>))),</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>  <span class="fu">atributoDataset</span>(<span class="at">name =</span> <span class="st">&quot;LogicalAttr&quot;</span>, <span class="at">vector =</span> (<span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)))</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>))</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>newDs <span class="ot">&lt;-</span> <span class="fu">filterMetrics</span>(dataset,<span class="st">&quot;Entropy&quot;</span>,<span class="st">&quot;&lt;&quot;</span>,<span class="dv">1</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>newDs</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co">#&gt; An object of class &quot;Dataset&quot;</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co">#&gt; Slot &quot;nombre&quot;:</span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Example&quot;</span></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="co">#&gt; Slot &quot;atributos&quot;:</span></span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="co">#&gt; [[1]]</span></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a><span class="co">#&gt; An object of class &quot;AtributoDataset&quot;</span></span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a><span class="co">#&gt; Slot &quot;nombre&quot;:</span></span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a><span class="co">#&gt; [1] &quot;FactorAttr&quot;</span></span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a><span class="co">#&gt; Slot &quot;tipo&quot;:</span></span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a><span class="co">#&gt; [1] &quot;factor&quot;</span></span>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a><span class="co">#&gt; Slot &quot;valores&quot;:</span></span>
+<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a><span class="co">#&gt; [1] rojo  verde verde verde</span></span>
+<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a><span class="co">#&gt; Levels: rojo verde</span></span>
+<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a><span class="co">#&gt; Slot &quot;cortes&quot;:</span></span>
+<span id="cb9-29"><a href="#cb9-29" tabindex="-1"></a><span class="co">#&gt; NULL</span></span></code></pre></div>
+<p>En este caso, vemos como solamente el atributo llamado “FactorAttr”
+cumple la condición, por lo que la función nos ha devuelto un dataset
+con sólamente ese atributo. En el caso del atributo numérico, se ha
+descartado directamente ya que es imposible calcular su entropía.</p>
+</div>
+<div id="correlación-e-información-mutua" class="section level2">
+<h2>Correlación e información mutua</h2>
+<p>Finalmente, se ha creado la función correlation(), al que dado un
+dataset, nos indica la correlación entre todos sus atributos. En caso de
+que los atributos sean discretos, se calcula la información mutua entre
+ambos.</p>
+<p>El resultado de esta función son dos matrices, una con la correlación
+y otra con la información mutua. Para este caso, hemos creado un dataset
+con 5 atributos de diferentes tipos, y ver así las dos matrices.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">createDataset</span>(<span class="at">nombre =</span> <span class="st">&quot;Example&quot;</span>, <span class="at">atributos =</span> <span class="fu">list</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>  <span class="fu">atributoDataset</span>(<span class="at">name =</span> <span class="st">&quot;NumericAttr&quot;</span>, <span class="at">vector =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)),</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>  <span class="fu">atributoDataset</span>(<span class="at">name =</span> <span class="st">&quot;FactorAttr&quot;</span>, <span class="at">vector =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">TRUE</span>,<span class="cn">FALSE</span>, <span class="cn">FALSE</span>)),</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>  <span class="fu">atributoDataset</span>(<span class="at">name =</span> <span class="st">&quot;FactorAttr2&quot;</span>, <span class="at">vector =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>, <span class="cn">FALSE</span>)),</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>  <span class="fu">atributoDataset</span>(<span class="at">name =</span> <span class="st">&quot;NumericAttr2&quot;</span>, <span class="at">vector =</span> <span class="fu">c</span>(<span class="dv">28</span>, <span class="dv">5</span>, <span class="dv">19</span>, <span class="dv">24</span>)),</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>  <span class="fu">atributoDataset</span>(<span class="at">name =</span> <span class="st">&quot;NumericAttr3&quot;</span>, <span class="at">vector =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>))</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>))</span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="fu">correlation</span>(dataset)</span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a><span class="co">#&gt; $correlations</span></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="co">#&gt;              NumericAttr NumericAttr2 NumericAttr3</span></span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a><span class="co">#&gt; NumericAttr   1.00000000   0.02573425   1.00000000</span></span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a><span class="co">#&gt; NumericAttr2  0.02573425   1.00000000   0.02573425</span></span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="co">#&gt; NumericAttr3  1.00000000   0.02573425   1.00000000</span></span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a><span class="co">#&gt; $mutual_information</span></span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a><span class="co">#&gt;             FactorAttr FactorAttr2</span></span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a><span class="co">#&gt; FactorAttr       1.000       0.857</span></span>
+<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a><span class="co">#&gt; FactorAttr2      0.857       0.811</span></span></code></pre></div>
+<p>Como vemos, la primera matriz devuelta (llamada correlations) calcula
+las correlaciones entre los 3 atributos cuantitativos. Por supuesto, la
+correlación de un atributo con él mismo es máxima (1), por lo que la
+diagonal de la matriz estará repleta de unos.</p>
+<p>En cuanto a la segunda matriz (llamada mutual_information) vemos que
+las dimensiones cambian. En este caso contamos con una matriz de 2x2
+debido a que solo hay 2 variables cualitativas en nuestro dataset. En la
+diagonal podemos observar la entropía, ya que la información mutua entre
+una variable y ella misma es la entropía. Contamos de nuevo con una
+matriz simétrica.</p>
+</div>
+</div>
+<div id="fichero-plotting.r" class="section level1">
+<h1>Fichero Plotting.R</h1>
+<p>En este fichero se recogen las dos funciones relacionadas con los
+gráficos, por lo que es necesario tener instalados los paquetes de
+<strong>ggplot2</strong>, <strong>reshape2</strong> y
+<strong>patchwork</strong></p>
+<div id="plot-para-el-auc" class="section level2">
+<h2>Plot para el AUC</h2>
+<p>Antes hemos visto como se puede calcular la metrica del área bajo la
+curva, pero quizá un simple número no nos aporte mucha información. Es
+por ello que se ha decidido crear este plot, para ver de una manera más
+visual el area bajo la curva del clasificador. De nuevo necesitamos un
+vector lógico en el dataset.</p>
+<p>Esta función internamente llama a calculate_rates, que devuelve el
+true positive rate, y el false positive rate, que serán los ejes de
+nuestro gráfico. Ademas muestra con una línea discontinua como sería un
+clasificador aleatorio, que acertaría al azar la mitad de los casos.</p>
+<p>Creamos un dataset más grande en este caso, de 200 individuos y 2
+atributos, también de manera aleatoria. A nuestra función plotROC() a
+parte de pasarle el dataset, debemos indicarle el atributo númerico con
+el cual queremos hacer la clasificación.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">createDataset</span>(<span class="at">nombre =</span> <span class="st">&quot;Example&quot;</span>, <span class="at">atributos =</span> <span class="fu">list</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>  <span class="fu">atributoDataset</span>(<span class="at">name =</span> <span class="st">&quot;NumericAttr&quot;</span>, <span class="at">vector =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">200</span>, <span class="dv">200</span>)),</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>  <span class="fu">atributoDataset</span>(<span class="at">name =</span> <span class="st">&quot;FactorAttr&quot;</span>, <span class="at">vector =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>), <span class="at">size =</span> <span class="dv">200</span>, <span class="at">replace=</span>T))</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>))</span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="fu">plotROC</span>(dataset,<span class="st">&quot;NumericAttr&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>Vemos que el clasificador utilizado, al ser creado de una manera
+aleatoria tiene un área muy parecida a lo que tendría uno 100%
+aleatorio, representando con la línea roja. Cuanto más grande sea
+nuestro dataset aleatorio, más se parecerá a la línea discontinua.
+Podemos calcular el AUC para comprobarlo.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">calculateMetrics</span>(dataset)<span class="sc">$</span>NumericAttr[<span class="st">&#39;AUC&#39;</span>]</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="co">#&gt;       AUC </span></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="co">#&gt; 0.5255138</span></span></code></pre></div>
+<p>Vemos que es prácticamente 0.5</p>
+</div>
+<div id="plot-para-las-matrices-de-correlación-e-información-mutua" class="section level2">
+<h2>Plot para las matrices de correlación e información mutua</h2>
+<p>Finalmente, en esta última función se obtienen las matrices de
+correlacion e información mutua tras llamar a correlation() y se
+muestran como un mapa de calor.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">createDataset</span>(<span class="at">nombre =</span> <span class="st">&quot;Example&quot;</span>, <span class="at">atributos =</span> <span class="fu">list</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>  <span class="fu">atributoDataset</span>(<span class="at">name =</span> <span class="st">&quot;N1&quot;</span>, <span class="at">vector =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)),</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>  <span class="fu">atributoDataset</span>(<span class="at">name =</span> <span class="st">&quot;F1&quot;</span>, <span class="at">vector =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>,<span class="cn">FALSE</span>,<span class="cn">FALSE</span>, <span class="cn">FALSE</span>)),</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>  <span class="fu">atributoDataset</span>(<span class="at">name =</span> <span class="st">&quot;F2&quot;</span>, <span class="at">vector =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>, <span class="cn">FALSE</span>)),</span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>  <span class="fu">atributoDataset</span>(<span class="at">name =</span> <span class="st">&quot;N2&quot;</span>, <span class="at">vector =</span> <span class="fu">c</span>(<span class="dv">28</span>,<span class="dv">5</span>,<span class="dv">19</span>, <span class="dv">26</span>)),</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>  <span class="fu">atributoDataset</span>(<span class="at">name =</span> <span class="st">&quot;N3&quot;</span>, <span class="at">vector =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>, <span class="dv">25</span>))</span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a>))</span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="fu">plotCorrelation</span>(dataset)</span></code></pre></div>
+<p><img src="data:image/png;base64,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/nN3UOq3d5cetR66L/C4sMwlty7qPWWAYz7Qgeqxna6LQwa/g9JVF44AQ1CEr9q7Xgfs0osruw/nuZ1LVOVGdqDGUIR7XErZOeHcxvq+NV0fnisWvuo4wACy1QMdQljcjJsbZ7/chUKpdvpFo7nylx2/94XSRq1ZK4XQOGiezH5yPLdx0Ezyb+gVmw0hhIUnu+1FCqWNWvPyE4CLm83axumitd1P5wfdu95N223WNkodfzkKhVKt2XUCcnFzt2ubV2yyZ5sHa9VVB2pxs3k2v1C67DBdv8FAehTh60uryk14EV68XwrhknMDJ807e2c2mt1vzfkPT7+FB/jAwFWiOI7H3YZsq69FS9WeV64DkDpFGBi9zPVAAwBAmgRoAABIQIAGAIAEjIEGAIAE9EADAEACAjQAACQgQAMAQAICNAAAJCBAAwBAAgI0AAAkIEADAEACAjQAACQgQAMAQAICNAAAJCBAAwBAAgI0AAAkIEADAEACAjQAACQgQAMAQAICNAAAJPD+uBswOh9H427BdPomDj936Iby0zhEDt1Q4njcLQCA4emBBgCABARoAABIQIAGAIAEMjQGGoAJ8a3LA6bfR3H4mfcxE7522cno6YEGAIAEBGgAAEhAgAYAgAQEaAAASECABgCABARoAABIQIAGAIAEBGgAAEhAgAYAgAQEaAAASECABgCABARoAABIQIAGAIAEBGgAAEhAgAYAgAQEaAAASECABgCABARoAABIQIAGAIAEBGgAAEhAgAYAgAQEaAAASECABgCABARoAABIQIAGAIAEBGgAAEhAgAYAgAQEaAAASECABgCABARoAABIQIAGAIAEBGgAAEhAgAYAgAQEaAAASECABgCABARoAABI4EYC9NF2eXn5+d65Ke0Je8+XT3QtAgAAE+jmeqBfP+uVj4+2y8/C452dnZ2dFw++67kIAABMjhsL0HcfPw498vHcSmXn0e3jH39y58PXDQkaAIBJdoNjoG8/6hmhTx394s3bu4XbN9cgAABI7EYvIrz96HH4Zvvo4oyj7fLy8sOvwoNV+RkAgIl2w3fhuL16583nFyP03EplZ2dn5+PvH5Z75WsAAJgUN30bu7mVz+68+Xz7lz1n3i7cfft971kAADARbv4+0HMrn9158+yrt8fP9p4vn3U67zVef/jjP73xFgEAwMDeH8Nrzq189uDN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" /><!-- -->
+Vemos cada celda indicada por un color, que cuanto más intenso sea el
+rojo más correlacionadas estarán las variables. En la matriz izquierda
+(que mide la correlación) vemos que la diagonal tiene el valor máximo, y
+también podemos observar como el atributo 2 y el 1 no están casi
+relacionados.</p>
+<p>En la matriz derecha, no vemos una diagonal tan marcada, ya que ésta
+no esta llena de unos. Aun así, sigue siendo simétrica, y la relación
+mas fuerte la encontramos al comparar el atributo F2 con él mismo. En
+este caso se esta midiendo la entropía de esa variable, que es igual a
+1.</p>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
