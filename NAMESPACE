@@ -1,0 +1,16 @@
+# Exportar clases S4
+exportClasses(AtributoDataset, Dataset)
+
+# Exportar métodos S4
+exportMethods(discretizeEW,discretizeEF,calculateRates,variance,entropy,calculateMetrics,
+              normalize,standarize,filterMetrics,correlation,plotROC,plotCorrelation)
+
+export(atributoDataset,createDataset,datasetFromCSV)
+
+importFrom("methods", "new")
+importFrom("stats", "sd", "setNames")
+importFrom("utils", "read.csv")
+import(ggplot2)
+import(reshape2)
+import(patchwork)
+

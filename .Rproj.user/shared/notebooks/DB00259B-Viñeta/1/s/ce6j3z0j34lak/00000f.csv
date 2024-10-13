@@ -1,0 +1,6 @@
+"0","dataset <- createDataset(nombre = ""Example"", atributos = list("
+"0","  atributoDataset(name = ""NumericAttr"", vector = sample(1:200, 200)),"
+"0","  atributoDataset(name = ""FactorAttr"", vector = sample(c(FALSE, TRUE), size = 200, replace=T))"
+"0",""
+"0","))"
+"0","plotROC(dataset,""NumericAttr"")"
