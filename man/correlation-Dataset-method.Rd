@@ -18,7 +18,7 @@ A list containing two matrices:
 }
 \description{
 This method iterates trough all the atributes of a dataset and calculates the correlation (or mutual Information) for each pair.
-For those calculations uses internal functions
+For those calculations uses the 'correlation' internal function.
 }
 \details{
 This method calculates the correlation for numeric attributes and mutual information for categorical attributes

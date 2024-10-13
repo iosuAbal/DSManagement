@@ -659,7 +659,7 @@ setGeneric(name="correlation", def=function(obj) standardGeneric("correlation"))
 #'   \item \code{mutual_information}: A symmetric matrix of mutual information values for categorical attributes
 #' }
 #' @description This method iterates trough all the atributes of a dataset and calculates the correlation (or mutual Information) for each pair.
-#' For those calculations uses internal functions
+#' For those calculations uses the 'correlation' internal function.
 #'
 #' @examples
 #' dataset <- createDataset(nombre = "Example", atributos = list(

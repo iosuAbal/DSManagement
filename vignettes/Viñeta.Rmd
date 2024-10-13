@@ -23,47 +23,84 @@ library(patchwork)
 
 ```
 
-En este tutorial se detallará cómo utilizar este nuevo paquete creado para el preprocesado de bases de datos.
+En este pequeño tutorial se detallará cómo utilizar este nuevo paquete creado para el preprocesado de bases de datos. Para simular las tablas de una base de datos, se han creado los objetos Dataset y AtributeDataset.
 
-# Introducción sobre los objetos S4
+Posteriormente se crearán pruebas de cada una de las funciones disponibles. Cabe destacar, que existen algunas funciones (tituladas con el sufijo '_base') que no están disponibles de cara al público, ya que son funciones internas del paquete y no se describirán en este tutorial. 
+
+Esas funciones estan definidas en la clase utils.R, que es la primera en ejecutarse al cargar el paquete. Posteriormente esas funciones base son llamadas desde los métodos definidos en 'Dataset.R', que sí son métodos públicos. Finalmente, en el tercer fichero llamado 'plotting_functions.R' estan definidas las dos funciones relacionadas con los gráficos, por lo que se han definido en un fichero a parte. 
+
+
+
+# Objetos S4
 Para que este paquete sea más flexible, se ha decidido crear objetos S4 para simular un dataset. Concretamente tenemos la clase "AtributoDataset", que representarán las variables o columnas de un dataset, y la clase "Dataset", que contendrá una lista de esos atributos.
 
+## Clase AtributoDataset
+Esta clase contiene los siguientes slots:
 
-En el caso de la clase dataset, se han implementado dos constructores diferentes. La función dataset() crea un dataset a partir de una lista de atributos. Sin embargo, el constructor datasetFromCSV() crea el dataset desde un fichero csv. En los siguientes ejemplos crearemos los datasets de ambas maneras.
+* Nombre: Nombre del atributo
+* Tipo: Clase a la que pertencen los valores (numerico, logico...)
+* Valores: Valores que forman el atributo
+* Cortes: Almacena los puntos de corte en caso de que los valores esten discretizados por intervalos. Puede ser nulo
 
-# Clase Dataset.R
+Para la creación de atributos se utilizará la siguiente sintaxis, donde proporcionaremos un nombre y una lista con los valores correspondientes:
+```{r}
+numeric_attr <- atributoDataset("Numeric Attribute", seq(1:20))
+logical_attr <- atributoDataset("Logical Attribute", sample(c(FALSE, TRUE), size = 20, replace = TRUE))
+
+logical_attr
+```
+Al crearlos, internamente se valida que ninguno de los slots sea vacío o nulo (menos el slot 'cortes').
+
+## Clase Dataset
+Esta clase es algo más sencilla y está formada por:
+
+* Nombre: Nombre del dataset
+* Atributos: Lista de AtributosDataset
+
+Para esta clase se han implementado dos constructores diferentes. La función dataset() crea un dataset a partir de una lista de atributos.
+
+```{r}
+my_dataset <- createDataset("My Dataset", list(numeric_attr, logical_attr))
+my_dataset
+```
+
+Sin embargo, el constructor datasetFromCSV() crea el dataset desde un fichero csv, donde será obligatorio especificar la ruta de dicho fichero.
+```{r}
+dsetCSV <- datasetFromCSV("../data/fichero.csv")
+dsetCSV
+```
+
+En ambos casos y cada vez que se crea un objeto del tipo Dataset, se valida que tenga atributos de la clase AtributoDataset, y que no contenga nombres de atributos repetidos.
+
+
+
+# Fichero Dataset.R
 En este fichero de R se han implementado ambas clases y todos sus métodos.
 
 
 ## Discretizar por igual anchura e igual frecuencia
 Para este primer método veremos como podemos discretizar los valores de un dataset (o de un atributo) en igual frecuencia y en igual anchura. Para ello hemos tenido que crear la función discretizeEW() y discretizeEF() genéricamente, y después, crear las implementaciones para cada clase.
 
-Supongamos que queremos discretizar en 3 intervalos de igual anchura los valores de un atributo:
+Supongamos que queremos discretizar en 3 intervalos de igual anchura los valores de un atributo: (utilizaremos los atributos ya creados)
 ```{r}
-numeric_attr <- atributoDataset("Numeric Attribute", seq(1:20))
 discretizeEW(numeric_attr, 3)
 ```
 
-Veamos ahora como podemos discretizar en 2 intervalos de igual frecuencia todos los atributos de un dataset. Para ello, crearemos el dataset mediante un fichero en formato csv que contiene la altura y el peso de 4 individuos.
+Veamos ahora como podemos discretizar en 2 intervalos de igual frecuencia todos los atributos de un dataset. Para ello, utilizaremos el dataset creado desde el csv, que contiene la altura y el peso de 4 individuos.
 ```{r eval=TRUE}
-#prueba
-ds <- datasetFromCSV("../data/fichero.csv")
-discretizeEF(ds, 2)
-
-
+discretizeEF(dsetCSV, 2)
 ```
-Podemos observar como ha creado un punto de corte para cada atributo, de tal manera que hay la misma cantidad de elementos en cada intervalo de cada atributo.
+Podemos observar como ha creado un punto de corte diferent para cada atributo, de tal manera que hay la misma cantidad de elementos en cada intervalo de cada atributo.
 
 ## Cálculo de métricas
 Esta función calcula la varianza y el Area Bajo la Curva (AUC) para cada variable cuantitativa, y calcula la entropía para cada variable cualitativa del dataset. Para que el AUC funcione correctamente, es necesario que el dataset cuente con un atributo lógico con el que comparar el clasificador. En caso de no contar con ninguno, calculará sólamente la varianza y la entropia, mostrando un warning.
 
 Para este ejemplo vamos a crear un dataset partiendo de una lista de atributos. Tras llamar a la función calculateMetrics() nos devolverá una lista con varianza, AUC y entropía para cada atributo del dataset. Por supuesto, en las variables cuantitativas la entropia no tendrá valor, y viceversa.
 ```{r}
-numeric_attr <- atributoDataset("Numeric Attribute", seq(1:20))
-logical_attr <- atributoDataset("Logical Attribute", sample(c(FALSE, TRUE), size = 20, replace = TRUE))
-my_dataset <- createDataset("My Dataset", list(numeric_attr, logical_attr))
 calculateMetrics(my_dataset)
 ```
+
+Se puede observar, como la entropía no tiene valor (NA) en el caso de atributos numéricos, y lo mismo para la varianza y el AUC en el caso del atributo lógico.
 
 
 ## Normalización y estandarización de atributos y datasets
