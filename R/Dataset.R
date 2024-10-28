@@ -1,3 +1,14 @@
+################################################################################
+# Definicion de objetos AtributeDataset y Dataset,y sus implementaciones #
+# Script principal del paquete #
+# *****************************************************************************#
+# Autor: Iosu Abal#
+# Fecha: 28/10/2024 #
+################################################################################
+
+
+# ATRIBUTODATASET OBJETO S4 -----------------------------------------------
+
 #' AtributoDataset Class
 #'
 #' This class represents a dataset attribute, containing its name, type, values, and the cuts after discretizing it.
@@ -62,6 +73,7 @@ validarAtributo <- function(object) {
 setValidity(Class="AtributoDataset", method=validarAtributo)
 
 
+# DATASET OBJECTO S4 -----------------------------------------------
 
 #' Dataset Class
 #'
@@ -144,8 +156,7 @@ datasetFromCSV <- function(file_path, sep=",") {
 }
 
 
-# Ejercicio1 --------------------------------------------------------------
-
+# DISCRETIZACION (EJERCICIO 1) -----------------------------------------------
 
 setGeneric(name="discretizeEW", def=function(obj, n_intervals) standardGeneric("discretizeEW"))
 setGeneric(name="discretizeEF", def=function(obj, n_intervals) standardGeneric("discretizeEF"))
@@ -191,7 +202,8 @@ setMethod(f="discretizeEW", signature="AtributoDataset",
 #' @param obj An object of class \code{\linkS4class{Dataset}} to be discretized.
 #' @param n_intervals An integer specifying the number of intervals to create for discretization.
 #'
-#' @return A new \code{\linkS4class{Dataset}} object containing all the attributes discretized
+#' @return A new \code{\linkS4class{Dataset}} object containing all the numerivc attributes discretized.
+#' Other attributes remain the same
 #'
 #' @examples
 #' # Create a Dataset object with numeric attributes
@@ -246,7 +258,6 @@ setMethod(f="discretizeEF", signature="AtributoDataset",
               stop("El atributo no es numérico o entero, no se puede discretizar.")
             }
             discretized_values <- discretizeEF_base(obj@valores, n_intervals)
-
             return(atributoDataset(paste(obj@nombre,"- Discretized(EF)"),discretized_values$vector, discretized_values$cut.points))
           })
 
@@ -272,7 +283,7 @@ setMethod(f="discretizeEF", signature="Dataset",
           definition=function(obj,n_intervals) {
             atributos_discretized <- lapply(obj@atributos, FUN = function(atributo) {
               if (atributo@tipo == "numeric" || atributo@tipo == "integer") {
-                return(discretizeEF(atributo,n_intervals))  # Llamar a la implementación de discretize en AtributoDataset
+                return(discretizeEF(atributo,n_intervals))  # Llamar a la implementación de discretizeEF en AtributoDataset
               }
               return(atributo)
             })
@@ -281,10 +292,8 @@ setMethod(f="discretizeEF", signature="Dataset",
           })
 
 
+# CALCULAR METRICAS (EJERCICIO 2) -----------------------------------------------
 
-# ejercicio2 --------------------------------------------------------------
-
-#TPR
 setGeneric(name="calculateRates", def=function(obj,numeric_attr_name) standardGeneric("calculateRates"))
 #' Calculate True Positive Rate (TPR) and False Positive Rate (FPR)
 #' @description This method calculates the TPR and FPR for each cut point in AttributeDataset values.
@@ -397,7 +406,7 @@ setMethod(f="entropy", signature="AtributoDataset",
           })
 
 
-#calculate metrics
+#calculate metrics general
 setGeneric(name="calculateMetrics", def=function(obj) standardGeneric("calculateMetrics"))
 
 #' Calculate Metrics for Dataset Objects
@@ -463,7 +472,7 @@ setMethod(f="calculateMetrics", signature="Dataset",
 
 
 
-# ejercicio3 ---------------------------------------------------------------
+# NORMALIZACION Y ESTANDARIZACION (EJERCICIO 3) -----------------------------------------------
 
 #normalize
 setGeneric(name="normalize", def=function(obj, cut.points) standardGeneric("normalize"))
@@ -589,7 +598,8 @@ setMethod(f="standarize", signature="Dataset",
           })
 
 
-# ejercicio4 --------------------------------------------------------------
+# FILTRADO POR METRICAS (EJERCICIO 4) -----------------------------------------------
+
 setGeneric(name="filterMetrics", def=function(obj, metric_name, operator ,value) standardGeneric("filterMetrics"))
 
 #' Filter the attributes of a \code{\linkS4class{Dataset}} object based on specific metrics.
@@ -643,7 +653,8 @@ setMethod(f = "filterMetrics", signature = "Dataset",
 
 
 
-# ejercicio5 --------------------------------------------------------------
+# CORRELACION E INFORMACION MUTUA (EJERCICIO 5) -----------------------------------------------
+
 setGeneric(name="correlation", def=function(obj) standardGeneric("correlation"))
 
 #' Calculate Correlation and Mutual Information for a \code{\linkS4class{Dataset}}

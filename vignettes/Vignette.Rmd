@@ -7,6 +7,11 @@ vignette: >
   %\VignetteIndexEntry{Vignette}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+classoptions: gipuzkoa, es, foot
+course: Software Matematico y Estadıstico
+mail: jabal002@ikasle.ehu.eus
+abstract:
+
 ---
 
 ```{r setup, include = FALSE}
@@ -81,16 +86,17 @@ En este fichero de R se han implementado ambas clases y todos sus métodos.
 ## Discretizar por igual anchura e igual frecuencia
 Para este primer método veremos como podemos discretizar los valores de un dataset (o de un atributo) en igual frecuencia y en igual anchura. Para ello hemos tenido que crear la función discretizeEW() y discretizeEF() genéricamente, y después, crear las implementaciones para cada clase.
 
-Supongamos que queremos discretizar en 3 intervalos de igual anchura los valores de un atributo: (utilizaremos los atributos ya creados)
+Supongamos que queremos discretizar en 3 intervalos de igual anchura los valores de un atributo: (utilizaremos los atributos ya creados, recordemos que en el atributo 'numeric_attr' tenemos una secuencia del 1 al 20)
 ```{r}
 discretizeEW(numeric_attr, 3)
 ```
+Como se puede observar, hay dos puntos de corte y 3 intervalos. Todos los intervalos miden lo mismo, en este caso 6,33.
 
 Veamos ahora como podemos discretizar en 2 intervalos de igual frecuencia todos los atributos de un dataset. Para ello, utilizaremos el dataset creado desde el csv, que contiene la altura y el peso de 4 individuos.
 ```{r eval=TRUE}
 discretizeEF(dsetCSV, 2)
 ```
-Podemos observar como ha creado un punto de corte diferent para cada atributo, de tal manera que hay la misma cantidad de elementos en cada intervalo de cada atributo.
+Podemos observar como ha creado un punto de corte diferente para cada atributo, de tal manera que hay la misma cantidad de elementos en cada intervalo de cada atributo. Este metodo podria aplicarse tambien a un atributo en particular.
 
 ## Cálculo de métricas
 Esta función calcula la varianza y el Area Bajo la Curva (AUC) para cada variable cuantitativa, y calcula la entropía para cada variable cualitativa del dataset. Para que el AUC funcione correctamente, es necesario que el dataset cuente con un atributo lógico con el que comparar el clasificador. En caso de no contar con ninguno, calculará sólamente la varianza y la entropia, mostrando un warning.
@@ -186,7 +192,7 @@ Podemos calcular el AUC para comprobarlo.
 ```{r}
 calculateMetrics(dataset)$NumericAttr['AUC']
 ```
-Vemos que es prácticamente 0.5
+Vemos que el valor es cercano 0.5, ya que literalmente, hemos creado un clasificador con valores aleaatorios.
 
 ## Plot para las matrices de correlación e información mutua
 Finalmente, en esta última función se obtienen las matrices de correlacion e información mutua tras llamar a correlation() y se muestran como un mapa de calor.

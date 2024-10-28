@@ -1,7 +1,16 @@
+################################################################################
+# Script orientado a graficos y plots sobre el preprocesado de bases de datos #
+# *****************************************************************************#
+# Autor: Iosu Abal#
+# Fecha: 28/10/2024 #
+################################################################################
+
 library(ggplot2)
 library(reshape2)
 library(patchwork)
 
+
+# AREA BAJO LA CURVA ------------------------------------------------------
 
 setGeneric(name="plotROC", def=function(obj, numeric_attr) standardGeneric("plotROC"))
 #' Plot ROC Curve
@@ -37,6 +46,8 @@ setMethod(f="plotROC", signature="Dataset",
           theme_minimal()
 })
 
+
+# MAPAS DE CALOR SOBRE CORRELACION E INFORMACION MUTUA --------------------
 
 setGeneric(name="plotCorrelation", def=function(obj) standardGeneric("plotCorrelation"))
 #' Plot Correlation and Mutual Information Heatmaps
